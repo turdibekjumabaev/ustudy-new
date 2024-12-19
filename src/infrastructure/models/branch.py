@@ -34,9 +34,9 @@ class Branch(db.Model):
             longitude (str): Longitude coordinate.
         """
         
-        self.name = fill_missing_translations(name)
-        self.address = fill_missing_translations(address)
-        self.landmark = fill_missing_translations(landmark)
+        self.name = name
+        self.address = address
+        self.landmark = landmark
         
         self.phone_number = phone_number
         self.open_time = open_time
