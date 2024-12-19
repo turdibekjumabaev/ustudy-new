@@ -50,7 +50,7 @@ class UserController:
     
     @staticmethod
     def update_user(id):
-        # try:
+        try:
             data = request.get_json()
             user_schema = UserSchema(partial=True, session=db.session)
             user_data = user_schema.load(data)
@@ -60,9 +60,9 @@ class UserController:
                 return error_response(404, _("User not found"))
             return success_response(data=updated_user_data)
             
-        # except Exception as e:
-        #     logger.error(e)
-        #     return error_response(500, _('Try again later'))
+        except Exception as e:
+            logger.error(e)
+            return error_response(500, _('Try again later'))
         
     @staticmethod
     def delete_user(id):
