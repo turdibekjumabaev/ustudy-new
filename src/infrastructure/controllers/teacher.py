@@ -40,6 +40,15 @@ class TeacherController:
         except Exception as e:
             logger.error(e)
             return error_response(500, _('Try again later'))
+        
+    @staticmethod
+    def get_teacher_by_branch_id(branch_id):
+        try:
+            teachers = TeacherService.get_teacher_by_branch_id(branch_id)
+            return success_response(data=teachers)
+        except Exception as e:
+            logger.error(e)
+            return error_response(500, _('Try again later'))
     
     @staticmethod
     def create_teacher():

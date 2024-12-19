@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_babel import _
-from marshmallow import Schema, fields, validates, ValidationError
+from marshmallow import fields, validates, ValidationError
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from src.database import db
 from src.infrastructure.models import User
@@ -18,8 +18,6 @@ class UserSchema(SQLAlchemyAutoSchema):
     password = fields.String(required=True, error_messages={"required": _("Password is required")})
     avatar = fields.String()
     branch_id = fields.Integer(required=True, error_messages={"required": _("Branch is required")})
-    created_at = fields.DateTime(dump_only=True, default=datetime.now)
-    updated_at = fields.DateTime(dump_only=True, default=datetime.now)
 
     @validates("phone_number")
     def validate_phone_number(self, value):
