@@ -1,3 +1,4 @@
+from datetime import datetime
 from src.database import db
 from src.infrastructure.models import Branch
 from sqlalchemy.exc import SQLAlchemyError
@@ -30,14 +31,14 @@ class BranchService:
 
     @staticmethod
     def get_branch_by_id(id):
-        branch = Branch.query.get(id)
+        branch = Branch.query.filter_by(id=id, deleted_at=None).first()
         if branch is None:
             return None
         return branch.to_dict()
 
     @staticmethod
     def get_all_branches():
-        branches = Branch.query.all()
+        branches = Branch.query.filter_by(deleted_at=None).all()
         return [branch.to_dict() for branch in branches]
 
     @staticmethod
@@ -56,7 +57,7 @@ class BranchService:
     def delete_branch(id):
             branch = Branch.query.get(id)
             if branch:
-                db.session.delete(branch)
+                branch.deleted_at = datetime.now()
                 db.session.commit()
                 return True
             return False

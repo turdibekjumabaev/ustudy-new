@@ -15,6 +15,7 @@ class Branch(db.Model):
     banner = db.Column(db.String, nullable=False)
     latitude = db.Column(db.String)
     longitude = db.Column(db.String)
+    deleted_at = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, onupdate=datetime.now)
 
