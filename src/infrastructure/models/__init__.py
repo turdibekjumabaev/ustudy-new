@@ -1,6 +1,7 @@
 import logging
 from flask import Flask
 from src.database import db
+from src.database.migrations import migrate
 
 from src.infrastructure.dataloader import load_data
 
@@ -19,6 +20,7 @@ from src.infrastructure.models.associations import *
 
 def init_db(app: Flask):
     db.init_app(app)
+    migrate.init_app(app, db)
     with app.app_context():
         db.create_all()
         load_data(db)
