@@ -18,3 +18,21 @@ class Faq(db.Model):
 
     def __repr__(self):
         return '<Faq %r>' % self.id
+    
+    def to_dict_with_locale(self, locale):
+        return {
+            'id': self.id,
+            'question': self.question.get(locale, ''),
+            'answer': self.answer.get(locale, ''),
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'question': self.question,
+            'answer': self.answer,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
