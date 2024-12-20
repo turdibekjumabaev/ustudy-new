@@ -1,8 +1,9 @@
-from datetime import datetime
 from src.database import db
+from .base import BaseModel
 
 
-class Lead(db.Model):
+
+class Lead(BaseModel):
     __tablename__ = 'leads'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,8 +13,6 @@ class Lead(db.Model):
     description = db.Column(db.String(500))
     branch_id = db.Column(db.Integer, db.ForeignKey('branches.id'), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, onupdate=datetime.now)
 
     def __init__(self, phone_number: str, branch_id: int, full_name: str = None, is_talked: bool = False, description: str = None, course_id: int = None):
         self.phone_number = phone_number

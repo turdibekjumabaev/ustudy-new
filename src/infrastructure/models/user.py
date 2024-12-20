@@ -1,13 +1,10 @@
-import json
-from datetime import datetime
 from werkzeug.security import generate_password_hash
 
 from src.database import db
-from src.infrastructure.models.role import Role
-from src.infrastructure.models.permission import Permission
+from .base import BaseModel
 
 
-class User(db.Model):
+class User(BaseModel):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -18,8 +15,6 @@ class User(db.Model):
     password = db.Column(db.String)
     avatar = db.Column(db.String)
     branch_id = db.Column(db.Integer, db.ForeignKey('branches.id'))
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, onupdate=datetime.now)
 
     # Relationship with Role (many-to-many via Role_User)
     roles = db.relationship('Role', secondary='role_user', back_populates='users')

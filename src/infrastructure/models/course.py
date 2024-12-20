@@ -1,10 +1,9 @@
-from sqlalchemy import event
-from datetime import datetime
 from src.database import db
 from src.common.utils import fill_missing_translations
+from .base import BaseModel
 
 
-class Course(db.Model):
+class Course(BaseModel):
     __tablename__ = 'courses'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -14,8 +13,6 @@ class Course(db.Model):
     icon = db.Column(db.String(255), nullable=False)
     duration_month = db.Column(db.Integer, nullable=False)
     branch_id = db.Column(db.Integer, db.ForeignKey('branches.id'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, onupdate=datetime.now)
 
     branch = db.relationship('Branch', backref='courses', lazy='select')
 

@@ -1,9 +1,9 @@
 from src.database import db
 from src.common.utils import fill_missing_translations
-from datetime import datetime
+from .base import BaseModel
 
 
-class Branch(db.Model):
+class Branch(BaseModel):
     __tablename__ = 'branches'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -15,9 +15,6 @@ class Branch(db.Model):
     banner = db.Column(db.String, nullable=False)
     latitude = db.Column(db.String)
     longitude = db.Column(db.String)
-    deleted_at = db.Column(db.DateTime)
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime, onupdate=datetime.now)
 
     def __init__(self, name=None, address=None, landmark=None, phone_number=None, open_time=None, 
                  banner=None, latitude=None, longitude=None):
