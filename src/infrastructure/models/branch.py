@@ -1,3 +1,4 @@
+import json
 from src.database import db
 from src.common.utils import fill_missing_translations
 from .base import BaseModel
@@ -7,11 +8,11 @@ class Branch(BaseModel):
     __tablename__ = 'branches'
     
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.JSON, nullable=False)
-    address = db.Column(db.JSON, nullable=False)
-    landmark = db.Column(db.JSON, nullable=False)
+    name = db.Column(db.JSON, nullable=False, default={})
+    address = db.Column(db.JSON, nullable=False, default={})
+    landmark = db.Column(db.JSON, nullable=False, default={})
     phone_number = db.Column(db.String(12), nullable=False)
-    open_time = db.Column(db.JSON, nullable=False)
+    open_time = db.Column(db.JSON, nullable=False, default={})
     banner = db.Column(db.String, nullable=False)
     latitude = db.Column(db.String)
     longitude = db.Column(db.String)
@@ -41,6 +42,22 @@ class Branch(BaseModel):
         self.banner = banner
         self.latitude = latitude
         self.longitude = longitude
+
+    def to_dict_with_locale(self, locale):
+        return {
+            "locale": locale,
+            "id": self.id,
+            "name": self.name.get(locale, ''),
+            "address": self.address.get(locale, ''),
+            "landmark": self.landmark.get(locale, ''),
+            "phone_number": self.phone_number,
+            "open_time": self.open_time,
+            "banner": self.banner,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
 
     def to_dict(self):
         return {

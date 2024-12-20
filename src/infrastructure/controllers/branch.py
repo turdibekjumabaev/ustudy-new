@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 class BranchController:
 
     @staticmethod
-    def get_all_branches(page, per_page):
+    def get_all_branches(page, per_page, locale):
         try:
-            branches = BranchService.get_all_branches(page=page, per_page=per_page)
+            branches = BranchService.get_all_branches(page=page, per_page=per_page, locale=locale)
             return success_response(data=branches)
         except Exception as e:
             logger.error(e)

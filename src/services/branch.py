@@ -37,10 +37,10 @@ class BranchService:
         return branch.to_dict()
 
     @staticmethod
-    def get_all_branches(page, per_page):
+    def get_all_branches(page, per_page, locale):
         branches = Branch.query.filter_by(deleted_at=None).paginate(page=page, per_page=per_page, error_out=False)
         return {
-            'items': [branch.to_dict() for branch in branches.items],
+            'items': [branch.to_dict_with_locale(locale) for branch in branches.items],
             'total': branches.total,
             'pages': branches.pages,
             'per_page': branches.per_page,
