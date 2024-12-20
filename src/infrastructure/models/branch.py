@@ -8,11 +8,11 @@ class Branch(BaseModel):
     __tablename__ = 'branches'
     
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.JSON, nullable=False, default={})
-    address = db.Column(db.JSON, nullable=False, default={})
-    landmark = db.Column(db.JSON, nullable=False, default={})
+    name = db.Column(db.JSON, nullable=False, default= lambda: {})
+    address = db.Column(db.JSON, nullable=False, default= lambda: {})
+    landmark = db.Column(db.JSON, nullable=False, default= lambda: {})
     phone_number = db.Column(db.String(12), nullable=False)
-    open_time = db.Column(db.JSON, nullable=False, default={})
+    open_time = db.Column(db.JSON, nullable=False, default= lambda: {})
     banner = db.Column(db.String, nullable=False)
     latitude = db.Column(db.String)
     longitude = db.Column(db.String)
