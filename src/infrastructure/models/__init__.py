@@ -8,6 +8,7 @@ from src.infrastructure.dataloader import load_data
 from src.infrastructure.models.role import Role
 from src.infrastructure.models.permission import Permission
 from src.infrastructure.models.faq import Faq
+from src.infrastructure.models.language import Language
 
 from src.infrastructure.models.user import User
 from src.infrastructure.models.branch import Branch
