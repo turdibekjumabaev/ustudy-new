@@ -37,9 +37,15 @@ class BranchService:
         return branch.to_dict()
 
     @staticmethod
-    def get_all_branches():
-        branches = Branch.query.filter_by(deleted_at=None).all()
-        return [branch.to_dict() for branch in branches]
+    def get_all_branches(page, per_page):
+        branches = Branch.query.filter_by(deleted_at=None).paginate(page=page, per_page=per_page, error_out=False)
+        return {
+            'items': [branch.to_dict() for branch in branches.items],
+            'total': branches.total,
+            'pages': branches.pages,
+            'per_page': branches.per_page,
+            'current_page': branches.page
+        }
 
     @staticmethod
     def update_branch(id, data):

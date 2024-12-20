@@ -3,3 +3,4 @@ from .user import user_routes
 from .teacher import teacher_routes
 from .course import course_routes
 from .gallery import gallery_routes
+from .branch import branch_routes
