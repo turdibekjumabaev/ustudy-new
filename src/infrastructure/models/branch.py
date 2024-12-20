@@ -2,6 +2,7 @@ import json
 from src.database import db
 from src.common.utils import fill_missing_translations
 from .base import BaseModel
+from .language import Language
 
 
 class Branch(BaseModel):
@@ -32,10 +33,11 @@ class Branch(BaseModel):
             latitude (str): Latitude coordinate.
             longitude (str): Longitude coordinate.
         """
+        language_codes = Language.get_language_codes()
         
-        self.name = name
-        self.address = address
-        self.landmark = landmark
+        self.name = fill_missing_translations(name, language_codes)
+        self.address = fill_missing_translations(address, language_codes)
+        self.landmark = fill_missing_translations(landmark, language_codes)
         
         self.phone_number = phone_number
         self.open_time = open_time
