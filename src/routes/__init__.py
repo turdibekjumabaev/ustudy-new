@@ -9,6 +9,7 @@ def register_routes(app: Flask) -> None:
     from .core import gallery_routes
     from .core import branch_routes
     from .core import faq_routes
+    from .core import lead_routes
 
     app.register_blueprint(index_routes)
     app.register_blueprint(user_routes, url_prefix='/core/api/v1/user')
@@ -17,3 +18,4 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(gallery_routes, url_prefix='/core/api/v1/gallery')
     app.register_blueprint(branch_routes, url_prefix='/core/api/v1/branch')
     app.register_blueprint(faq_routes, url_prefix='/core/api/v1/faq')
+    app.register_blueprint(lead_routes, url_prefix='/core/api/v1/lead')
