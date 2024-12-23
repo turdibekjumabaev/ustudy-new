@@ -14,11 +14,18 @@ class UserService:
         return users_data
 
     @staticmethod
-    def get_user_by_id(id):
+    def get_user_by_id(id) -> User:
         user: User = User.query.get(id)
         if not user:
             return None
         return user.to_dict()
+    
+    @staticmethod
+    def get_user_by_phone_number(phone_number) -> User:
+        user: User = User.query.filter_by(phone_number=phone_number).first()
+        if not user:
+            return None
+        return user
     
     @staticmethod
     def create_user(data: dict):
