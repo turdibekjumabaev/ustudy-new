@@ -13,7 +13,11 @@ def init_nukus_branch(db):
             'kk': 'A.Shamuratova 94',
             'ru': 'А.Шамуратова 92'
         },
-        'landmark': 'Жилой комплекс Нукус Сити',
+        'landmark': {
+            'uz': 'Nukus city turatjoy muajimosi',
+            'kk': 'Nókis city úyleri',
+            'ru': 'Жилой комплекс Нукус Сити'
+        },
         'phone_number': '998555015353',
         'open_time': {
             "weekdays": {
