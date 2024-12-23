@@ -16,7 +16,7 @@ def load_permissions(db):
     for default_permission in default_permissions:
         permission = Permission.query.filter_by(name=default_permission).first()
 
-        if permission is None:
+        if not permission:
             new_permission = Permission(default_permission)
             db.session.add(new_permission)
 
