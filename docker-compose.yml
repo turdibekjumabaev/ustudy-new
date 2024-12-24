@@ -9,6 +9,8 @@ services:
       - FLASK_ENV=${FLASK_ENV}
     depends_on:
       - db
+    volumes:
+      - .:/app
 
   db:
     image: postgres:latest
