@@ -102,6 +102,7 @@ class User(BaseModel):
             'patronymic': self.patronymic,
             'phone_number': self.phone_number,
             'avatar': self.avatar,
+            'roles': [role.name for role in self.roles],
             'branch_id': self.branch_id,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
